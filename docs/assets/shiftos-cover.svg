@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="520" viewBox="0 0 1440 520" role="img" aria-labelledby="title desc">
+  <title id="title">ShiftOS — one workspace for every shift</title>
+  <desc id="desc">Restaurant operations: team, tasks, standards and an independent AI gateway.</desc>
+  <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#f5f3e8" stroke-opacity=".055"/></pattern></defs>
+  <rect width="1440" height="520" rx="28" fill="#173e35"/>
+  <rect width="1440" height="520" rx="28" fill="url(#grid)"/>
+  <circle cx="1300" cy="40" r="310" fill="#dfe787" opacity=".04"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="64" y="58" width="46" height="46" rx="14" fill="#e3ed9a"/>
+    <path d="M95 69H80L74 80L92 83L84 95H72" fill="none" stroke="#173e35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="126" y="90" font-size="34" font-weight="700" fill="#fffef6">ShiftOS</text>
+    <text x="64" y="166" font-size="14" letter-spacing="4" fill="#e3ed9a">THE RESTAURANT OPERATING WORKSPACE</text>
+    <text x="60" y="244" font-size="68" font-weight="700" letter-spacing="-3" fill="#fffef6">Every shift.</text>
+    <text x="60" y="321" font-size="68" font-weight="700" letter-spacing="-3" fill="#e3ed9a">Under control.</text>
+    <text x="64" y="374" font-size="21" fill="#bfd0c7">Team. Tasks. Standards. One shared picture.</text>
+    <rect x="64" y="427" width="138" height="32" rx="16" fill="#2c5146"/>
+    <text x="133" y="448" font-size="12" letter-spacing="1.6" text-anchor="middle" fill="#e3ed9a">FOUNDATION 0.1</text>
+    <text x="222" y="448" font-size="13" fill="#bfd0c7">Built for desktop + mobile</text>
+    <g transform="translate(837 85)">
+      <rect width="533" height="346" rx="23" fill="#f7f5eb"/>
+      <rect x="22" y="22" width="11" height="11" rx="5.5" fill="#c36944"/>
+      <rect x="41" y="22" width="11" height="11" rx="5.5" fill="#d2d8ad"/>
+      <rect x="60" y="22" width="11" height="11" rx="5.5" fill="#b5c8ba"/>
+      <text x="29" y="81" font-size="26" font-weight="700" fill="#173e35">A calmer service.</text>
+      <text x="29" y="108" font-size="14" fill="#708077">A clear next step for everyone.</text>
+      <g transform="translate(29 132)">
+        <rect width="229" height="78" rx="13" fill="#e5edbb"/>
+        <text x="17" y="30" font-size="13" fill="#53664a">OPERATIONS</text>
+        <text x="17" y="57" font-size="20" font-weight="700" fill="#173e35">Tasks + checklists</text>
+      </g>
+      <g transform="translate(273 132)">
+        <rect width="231" height="78" rx="13" fill="#eee5d7"/>
+        <text x="17" y="30" font-size="13" fill="#8a684e">KNOWLEDGE</text>
+        <text x="17" y="57" font-size="20" font-weight="700" fill="#173e35">Menu + training</text>
+      </g>
+      <rect x="29" y="226" width="475" height="86" rx="13" fill="#fffef8" stroke="#dce0d3"/>
+      <circle cx="57" cy="256" r="7" fill="#60876e"/>
+      <text x="76" y="262" font-size="16" font-weight="700" fill="#173e35">Organization → restaurant → team</text>
+      <text x="47" y="290" font-size="13" fill="#708077">Tenant boundaries in the application and database.</text>
+    </g>
+  </g>
+</svg>

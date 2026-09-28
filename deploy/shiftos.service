@@ -1,0 +1,35 @@
+[Unit]
+Description=ShiftOS application
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=shiftos
+Group=shiftos
+WorkingDirectory=/opt/shiftos/current
+EnvironmentFile=/etc/shiftos/app.env
+Environment=NODE_ENV=production
+Environment=HOSTNAME=127.0.0.1
+Environment=PORT=3000
+Environment=NEXT_TELEMETRY_DISABLED=1
+ExecStart=/usr/local/bin/node server.js
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+KillSignal=SIGTERM
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/shiftos/current/.next/cache
+RestrictSUIDSGID=true
+CapabilityBoundingSet=
+MemoryMax=700M
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target
