@@ -1,6 +1,7 @@
 <p align="center"><img src="docs/assets/shiftos-cover.svg" alt="ShiftOS — Every shift. Under control." width="100%" /></p>
 
 <p align="center">
+  <a href="https://github.com/arturuseinov49-collab/ShiftOS/actions/workflows/ci.yml"><img alt="Checks" src="https://github.com/arturuseinov49-collab/ShiftOS/actions/workflows/ci.yml/badge.svg" /></a>
   <img alt="Next.js 16" src="https://img.shields.io/badge/Next.js-16-173e35?style=flat-square" />
   <img alt="TypeScript strict" src="https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square" />
   <img alt="Supabase and PostgreSQL" src="https://img.shields.io/badge/Supabase-PostgreSQL-3ecf8e?style=flat-square" />
@@ -10,6 +11,8 @@
 # ShiftOS
 
 Рабочий фундамент цифрового управляющего заведением. Sprint 1, версия 0.1.0.
+
+**[Открыть демо →](https://shiftos.191-44-44-231.sslip.io/demo)** · HTTPS · вымышленные данные · вход не требуется
 
 Команда, задачи, чек-листы, меню и обучение в одном рабочем пространстве.
 ShiftOS помогает видеть состояние смены и следующий шаг — от экрана владельца до телефона сотрудника.
