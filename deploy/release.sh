@@ -9,7 +9,7 @@ SOURCE=$(realpath "${1:?Provide the source directory}")
 # Serialize releases; a second deploy must not switch the symlink during a build.
 exec 9>/run/shiftos-deploy.lock
 flock -n 9 || { echo "Another deployment is running" >&2; exit 1; }
-RELEASE=$(date -u +%Y%m%dT%H%M%SZ)-$(git -C "$SOURCE" rev-parse --short HEAD)
+RELEASE=$(date -u +%Y%m%dT%H%M%SZ)-$(runuser -u shiftos -- git -C "$SOURCE" rev-parse --short HEAD)
 TARGET="/opt/shiftos/releases/$RELEASE"
 [[ ! -e "$TARGET" ]] || { echo "Release already exists" >&2; exit 1; }
 install -d -o shiftos -g shiftos /opt/shiftos/releases "$TARGET"
