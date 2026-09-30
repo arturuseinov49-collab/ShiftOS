@@ -47,7 +47,7 @@ export function shiftProblems(state: DemoState, actor: Actor): ShiftProblem[] {
         evidence: `${order.table} · ${minutes} мин с поступления, норматив участка ${area.targetMinutes} мин. Не готовы: ${pending.map((i) => i.title).join(", ")}.`,
         instruction: `Уточните готовность позиций заказа ${order.number}, согласуйте время с залом и сообщите гостю. Зафиксируйте причину задержки и результат.`,
         department: area.department,
-        href: "/demo/orders",
+        href: `/demo/orders?order=${encodeURIComponent(order.id)}`,
         priority: "high",
       });
     }
@@ -65,7 +65,7 @@ export function shiftProblems(state: DemoState, actor: Actor): ShiftProblem[] {
       evidence: `${invoice.supplier} · разница документа и приёмки ${rubles(difference)}. ${invoice.note || "Количество не совпало."} Оплата заблокирована.`,
       instruction: `Сверьте приёмку ${invoice.number} с поставщиком. Получите исправленный документ на фактическое количество либо договоритесь о допоставке. Приложите номер документа к результату.`,
       department: invoice.department,
-      href: "/demo/invoices",
+      href: `/demo/invoices?invoice=${encodeURIComponent(invoice.id)}`,
       priority: "high",
     });
   }
@@ -84,7 +84,7 @@ export function shiftProblems(state: DemoState, actor: Actor): ShiftProblem[] {
       evidence: `Начало работы ${area.opens}. Не отмечено: ${missing.map((i) => i.title).join(", ")}. Это отсутствие подтверждения, а не доказательство невыполненной работы.`,
       instruction: `Проверьте готовность участка и отметьте фактически выполненные пункты: ${missing.map((i) => i.title).join(", ")}. Сообщите администратору об отклонениях.`,
       department: area.department,
-      href: "/demo/checklists",
+      href: `/demo/checklists?area=${area.department}`,
       priority: "normal",
     });
   }

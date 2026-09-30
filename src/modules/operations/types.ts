@@ -151,7 +151,7 @@ export const invoiceSchema = z.object({
   department,
   status: z.enum(["expected", "received", "discrepancy"]),
   paid: z.boolean(),
-  note: z.string().max(1000),
+  note: z.string().max(2000),
   items: z
     .array(
       z.object({

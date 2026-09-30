@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   ChefHat,
   Martini,
@@ -264,7 +265,11 @@ export function Departments({ ctx }: { ctx: DemoContext }) {
   );
 }
 export function Checklists({ ctx }: { ctx: DemoContext }) {
-  const [department, setDepartment] = useState("all");
+  const params = useSearchParams();
+  const [department, setDepartment] = useState(() => {
+    const area = params.get("area");
+    return departments.find((d) => d === area) ?? "all";
+  });
   const employee = employeeFor(ctx.state, ctx.actor);
   const lists = ctx.state.checklists.filter(
     (c) =>
@@ -342,9 +347,17 @@ const orderNames: Record<Order["status"], string> = {
   cancelled: "Отменён",
 };
 export function Orders({ ctx }: { ctx: DemoContext }) {
+  const params = useSearchParams();
   const [view, setView] = useState("active");
   const [department, setDepartment] = useState("all");
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(
+    () =>
+      ctx.state.orders.find(
+        (o) =>
+          o.restaurantId === ctx.state.restaurantId &&
+          o.id === params.get("order"),
+      )?.number ?? "",
+  );
   const manager = canManage(ctx.actor);
   const employee = employeeFor(ctx.state, ctx.actor);
   const selected = manager ? department : (employee?.department ?? "none");

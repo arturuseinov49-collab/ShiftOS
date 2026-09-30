@@ -202,8 +202,16 @@ test("invoice receipt records shortages and blocks payment", async ({
   ).toBeVisible();
   await page.getByLabel("Комментарий к приёмке").fill("Не хватает 1 кг тыквы");
   await page.getByRole("button", { name: "Подтвердить приёмку" }).click();
+  await page.goto("/demo/assistant");
   await page
-    .getByRole("button", { name: "Открыть накладную ПН-0929-01", exact: true })
+    .getByRole("article")
+    .filter({
+      has: page.getByRole("heading", {
+        name: "Расхождение в поставке ПН-0929-01",
+        exact: true,
+      }),
+    })
+    .getByRole("link", { name: "Открыть источник" })
     .click();
   await expect(page.getByLabel("Комментарий к приёмке")).toHaveValue(
     "Не хватает 1 кг тыквы",
@@ -243,7 +251,8 @@ test("shift problem creates one assigned task and disappears after preparation",
   await expect(
     problem.getByRole("button", { name: /Назначить разбор/ }),
   ).toHaveCount(0);
-  await page.goto("/demo/orders");
+  await problem.getByRole("link", { name: "Открыть источник" }).click();
+  await expect(page.getByLabel("Поиск заказов")).toHaveValue("#1502");
   const order = page
     .locator("section")
     .filter({ has: page.getByRole("heading", { name: /^#1502/ }) })
@@ -258,6 +267,20 @@ test("shift problem creates one assigned task and disappears after preparation",
     .click();
   await page.goto("/demo/assistant");
   await expect(problem).toHaveCount(0);
+  await page
+    .getByRole("article")
+    .filter({
+      has: page.getByRole("heading", {
+        name: "Готовность участка не подтверждена · Бар",
+        exact: true,
+      }),
+    })
+    .getByRole("link", { name: "Открыть источник" })
+    .click();
+  await expect(page.getByLabel("Участок чек-листов")).toHaveValue("bar");
+  await expect(
+    page.getByRole("heading", { name: "Готовность кухни", exact: true }),
+  ).toHaveCount(0);
 });
 test("production routes remain fail-closed without Supabase", async ({
   page,

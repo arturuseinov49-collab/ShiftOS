@@ -357,9 +357,7 @@ export function acceptCorrectedInvoice(
             ...i,
             items,
             status: "received",
-            note: `${i.note}\nИсправленный документ: ${resolution.trim().slice(0, 400)}`.slice(
-              -1000,
-            ),
+            note: `${i.note}\nИсправленный документ: ${resolution.trim().slice(0, 400)}`,
           }
         : i,
     ),

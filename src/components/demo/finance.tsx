@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Plus, Download, ArrowUpRight, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -399,7 +400,15 @@ export function Finance({ ctx }: { ctx: DemoContext }) {
   );
 }
 export function Invoices({ ctx }: { ctx: DemoContext }) {
-  const [selected, setSelected] = useState<string | null>(null);
+  const params = useSearchParams();
+  const [selected, setSelected] = useState<string | null>(
+    () =>
+      ctx.state.invoices.find(
+        (i) =>
+          i.restaurantId === ctx.state.restaurantId &&
+          i.id === params.get("invoice"),
+      )?.id ?? null,
+  );
   const [filter, setFilter] = useState("all");
   const invoices = ctx.state.invoices.filter(
     (i) => i.restaurantId === ctx.state.restaurantId,
