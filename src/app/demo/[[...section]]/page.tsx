@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
-import { Workspace } from "@/components/workspace/workspace";
-import { demoWorkspace } from "@/modules/workspace/demo";
-import { sections, type Section } from "@/modules/workspace/types";
+import { DemoWorkspace } from "@/components/demo/workspace";
+import { demoSections, type DemoSection } from "@/modules/operations/types";
 export default async function DemoPage({
   params,
 }: {
@@ -9,12 +8,7 @@ export default async function DemoPage({
 }) {
   const { section: path = [] } = await params;
   const section = path[0] ?? "dashboard";
-  if (path.length > 1 || !sections.includes(section as Section)) notFound();
-  return (
-    <Workspace
-      key={section}
-      data={demoWorkspace}
-      section={section as Section}
-    />
-  );
+  if (path.length > 1 || !demoSections.includes(section as DemoSection))
+    notFound();
+  return <DemoWorkspace key={section} section={section as DemoSection} />;
 }
