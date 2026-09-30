@@ -485,6 +485,7 @@ function Dashboard({
   );
   return (
     <div className="space-y-6">
+      {!manager && <NextActions ctx={ctx} onOpen={onOpen} />}
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {ctx.actor.role === "owner" ? (
           <>
@@ -628,37 +629,7 @@ function Dashboard({
           <Problems ctx={ctx} limit={3} />
         </Panel>
       )}
-      <Panel
-        title={manager ? "Ближайшие действия" : "Мои задачи и очередь участка"}
-        description="Сначала приоритетные задачи и незавершённая работа"
-        action={
-          <Link
-            href="/demo/tasks"
-            className="text-xs font-medium text-[#6d805b]"
-          >
-            Все задачи ↗
-          </Link>
-        }
-      >
-        <div className="grid gap-3 lg:grid-cols-2">
-          {[...active]
-            .sort(
-              (a, b) =>
-                Number(b.priority === "high") - Number(a.priority === "high") ||
-                a.dueAt.localeCompare(b.dueAt),
-            )
-            .slice(0, 4)
-            .map((task) => (
-              <TaskRow key={task.id} task={task} ctx={ctx} onOpen={onOpen} />
-            ))}
-        </div>
-        {!active.length && (
-          <Empty
-            title="Отличная работа"
-            text="Открытых задач пока нет. Проверьте чек-лист участка."
-          />
-        )}
-      </Panel>
+      {manager && <NextActions ctx={ctx} onOpen={onOpen} />}
       {ctx.actor.role === "owner" && (
         <div className="grid gap-4 md:grid-cols-2">
           <Link
@@ -690,6 +661,51 @@ function Dashboard({
         </div>
       )}
     </div>
+  );
+}
+function NextActions({
+  ctx,
+  onOpen,
+}: {
+  ctx: DemoContext;
+  onOpen: (task: OperationTask) => void;
+}) {
+  const active = visibleTasks(ctx.state, ctx.actor).filter(
+    (t) => t.status !== "done",
+  );
+  return (
+    <Panel
+      title={
+        canManage(ctx.actor)
+          ? "Ближайшие действия"
+          : "Мои задачи и очередь участка"
+      }
+      description="Сначала приоритетные задачи и незавершённая работа"
+      action={
+        <Link href="/demo/tasks" className="text-xs font-medium text-[#6d805b]">
+          Все задачи ↗
+        </Link>
+      }
+    >
+      <div className="grid gap-3 lg:grid-cols-2">
+        {[...active]
+          .sort(
+            (a, b) =>
+              Number(b.priority === "high") - Number(a.priority === "high") ||
+              a.dueAt.localeCompare(b.dueAt),
+          )
+          .slice(0, 4)
+          .map((task) => (
+            <TaskRow key={task.id} task={task} ctx={ctx} onOpen={onOpen} />
+          ))}
+      </div>
+      {!active.length && (
+        <Empty
+          title="Отличная работа"
+          text="Открытых задач пока нет. Проверьте чек-лист участка."
+        />
+      )}
+    </Panel>
   );
 }
 function Knowledge({
